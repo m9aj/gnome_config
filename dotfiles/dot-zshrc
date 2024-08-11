@@ -1,0 +1,84 @@
+# Set the directory we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Add in zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+
+# Add in snippets
+zinit snippet OMZP::sudo #(Press Esc twice to add sudo)
+
+# Load completions
+autoload -Uz compinit && compinit
+zinit cdreplay -q
+
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
+# Shell integrations
+eval "$(fzf --zsh)"
+eval "$(zoxide init --cmd cd zsh)"
+
+#Custom Prompt
+eval "$(starship init zsh)"
+
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+#Keybindings
+bindkey "^[[3~" delete-char		# Del
+bindkey "^[[2~" quoted-insert		# Ins
+bindkey "^[[H" beginning-of-line	# Home
+bindkey "^[[F" end-of-line		# End
+bindkey "^[[5~" beginning-of-history	# PageUp
+bindkey "^[[6~" end-of-history		# PageDown
+
+# Environment Variables
+export PATH="${PATH}:/home/ajay/Arch/scripts"
+export EDITOR="$(if [[ -n $DISPLAY ]]; then echo 'gnome-text-editor'; else echo 'nano'; fi)"
+
+# Aliases
+alias ls='ls --color'
+alias c='clear'
+alias s='sudo $(fc -ln -1)'
+alias pas='sudo pacman -S'
+alias par='sudo pacman -Rns'
+alias pau='sudo pacman -Syu; sudo paccache -rk1'
+alias Makepkg='makepkg -sic --skippgpcheck'
+alias yas='paru -S'
+alias yass='paru -S --mflags --skipinteg'
+alias stowu='stow --dir ~/Arch/config/dotfiles --target ~ --dotfiles .'
+alias stowa='stow --adopt --dir ~/Arch/config/dotfiles --target ~ --dotfiles .'
+alias giti='git init .'
+alias gits='git status'
+alias gita='git add'
+alias gitaa='git add .'
+alias gitc='git commit -m'
+alias gitra='git remote add origin'
+alias gitp='git push origin main'
+
