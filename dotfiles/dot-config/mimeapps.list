@@ -2,7 +2,7 @@
 application/x-shellscript=org.gnome.gedit.desktop;org.gnome.TextEditor.desktop;
 text/plain=org.gnome.gedit.desktop;org.gnome.TextEditor.desktop;
 video/mp4=org.gnome.Totem.desktop;vlc.desktop;
-video/x-matroska=org.gnome.Totem.desktop;
+video/x-matroska=org.gnome.Totem.desktop;vlc.desktop;
 application/pdf=org.gnome.Evince.desktop;
 audio/mpeg=io.bassi.Amberol.desktop;
 audio/wav=io.bassi.Amberol.desktop;
@@ -25,8 +25,9 @@ audio/x-pn-wav=io.bassi.Amberol.desktop;
 audio/x-speex=io.bassi.Amberol.desktop;
 audio/x-vorbis=io.bassi.Amberol.desktop;
 audio/x-wavpack=io.bassi.Amberol.desktop;
-image/jpeg=org.gnome.eog.desktop;
+image/jpeg=org.gnome.eog.desktop;org.gnome.Loupe.desktop;
 image/png=org.gnome.eog.desktop;
+image/webp=org.gnome.Loupe.desktop;
 
 [Default Applications]
 application/x-shellscript=org.gnome.TextEditor.desktop
@@ -53,6 +54,8 @@ audio/x-pn-wav=io.bassi.Amberol.desktop
 audio/x-speex=io.bassi.Amberol.desktop
 audio/x-vorbis=io.bassi.Amberol.desktop
 audio/x-wavpack=io.bassi.Amberol.desktop
-image/jpeg=org.gnome.eog.desktop
+image/jpeg=org.gnome.Loupe.desktop
 image/png=org.gnome.eog.desktop
 video/mp4=vlc.desktop
+image/webp=org.gnome.Loupe.desktop
+video/x-matroska=vlc.desktop
